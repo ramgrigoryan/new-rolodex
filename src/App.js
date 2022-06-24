@@ -1,6 +1,7 @@
 import { Component } from "react";
 import "./App.css";
 import CardList from "./components/CardList/CardList.component";
+import SearchBox from "./components/SearchBox/SearchBox.component";
 
 class App extends Component {
   constructor() {
@@ -9,7 +10,6 @@ class App extends Component {
       monsters: [],
       searchField: "",
     };
-    console.log("constructor");
   }
 
   componentDidMount() {
@@ -29,7 +29,6 @@ class App extends Component {
           }
         );
       });
-    console.log("CDM");
   }
 
   onSearchChange = (event) => {
@@ -42,7 +41,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("render");
     const { monsters, searchField } = this.state;
     const { onSearchChange } = this;
     const filteredArray = monsters.filter((monster) =>
@@ -50,13 +48,8 @@ class App extends Component {
     );
     return (
       <div className="App">
-        <input
-          className="search-input"
-          type="search"
-          placeholder="Monster name"
-          onChange={onSearchChange}
-        />
-       <CardList monsters={filteredArray}/>
+        <SearchBox cb={onSearchChange}/>
+        <CardList monsters={filteredArray} />
       </div>
     );
   }
